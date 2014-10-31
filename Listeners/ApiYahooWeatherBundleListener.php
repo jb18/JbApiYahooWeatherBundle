@@ -10,7 +10,9 @@ class ApiYahooWeatherBundleListener {
     }
     
     public function onKernelResponse(\Symfony\Component\HttpKernel\Event\FilterResponseEvent $event){
-        $event->getResponse()->headers->set('api-weather-hit-cache',$this->apiYahooWeatherService->get_lastIncache());
+        if($this->apiYahooWeatherService->get_lastIncache()!=""){
+            $event->getResponse()->headers->set('api-weather-hit-cache',$this->apiYahooWeatherService->get_lastIncache());
+        }
     }
     
 }

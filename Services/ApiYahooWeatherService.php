@@ -34,9 +34,11 @@ class ApiYahooWeatherService {
             $data = $this->memcached->fetch($woeid);
         }
         if($data === false){
-            $this->lastInCache = "no";
             $this->apiYahooWeatherObject->callApi($woeid,($unit===false)?$this->unit:$unit);
-            $this->memcached->save($woeid,$this->apiYahooWeatherObject->get_lastResponse(),$this->ttl);
+            if($this->memcached !== null){
+                $this->lastInCache = "no";
+                $this->memcached->save($woeid,$this->apiYahooWeatherObject->get_lastResponse(),$this->ttl);
+            }
         }else{
             $this->lastInCache = "yes";
             $this->apiYahooWeatherObject->set_lastResponse($data);
