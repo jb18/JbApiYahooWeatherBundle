@@ -11,17 +11,17 @@ class ApiYahooWeatherTwigExtension extends \Twig_Extension {
     
     public function getFunctions() {
         return array(
-            new \Twig_SimpleFunction('jbAYW_get_temperature', array($this, 'get_temperature')),
-            new \Twig_SimpleFunction('jbAYW_get_location', array($this, 'get_location'))
+            new \Twig_SimpleFunction('jbAYW_get_temperature', array($this, 'getTemperature')),
+            new \Twig_SimpleFunction('jbAYW_get_location', array($this, 'getLocation'))
         );
     }
     
-    public function get_temperature($with_units=false){
-        return $this->ApiYahooWeatherService->get_temperature($with_units);
+    public function getTemperature($with_units=false){
+        return $this->ApiYahooWeatherService->getTemperature($with_units);
     }
     
-    public function get_location(){
-        return $this->ApiYahooWeatherService->get_location();
+    public function getLocation(){
+        return $this->ApiYahooWeatherService->getLocation();
     }
     
     public function getName()

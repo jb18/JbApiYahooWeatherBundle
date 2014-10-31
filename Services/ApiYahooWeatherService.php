@@ -37,32 +37,32 @@ class ApiYahooWeatherService {
             $this->apiYahooWeatherObject->callApi($woeid,($unit===false)?$this->unit:$unit);
             if($this->memcached !== null){
                 $this->lastInCache = "no";
-                $this->memcached->save($woeid,$this->apiYahooWeatherObject->get_lastResponse(),$this->ttl);
+                $this->memcached->save($woeid,$this->apiYahooWeatherObject->getLastResponse(),$this->ttl);
             }
         }else{
             $this->lastInCache = "yes";
-            $this->apiYahooWeatherObject->set_lastResponse($data);
+            $this->apiYahooWeatherObject->setLastResponse($data);
         }
     }
     
-    public function get_lastIncache(){
+    public function getLastIncache(){
         return $this->lastInCache;
     }
 
-    public function get_lastResponse($toJson = false) {
-        return $this->apiYahooWeatherObject->get_lastResponse($toJson);
+    public function getLastResponse($toJson = false) {
+        return $this->apiYahooWeatherObject->getLastResponse($toJson);
     }
 
-    public function get_temperature($with_unit = false) {
-        return $this->apiYahooWeatherObject->get_temperature($with_unit);
+    public function getTemperature($with_unit = false) {
+        return $this->apiYahooWeatherObject->getTemperature($with_unit);
     }
     
-    public function get_location(){
-        return $this->apiYahooWeatherObject->get_location();
+    public function getLocation(){
+        return $this->apiYahooWeatherObject->getLocation();
     }
     
-    public function get_forecast(){
-        return $this->apiYahooWeatherObject->get_forecast();
+    public function getForecast(){
+        return $this->apiYahooWeatherObject->getForecast();
     }
 
 }
