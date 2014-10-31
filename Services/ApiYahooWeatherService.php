@@ -9,7 +9,7 @@ class ApiYahooWeatherService {
     protected $apiYahooWeatherObject = null;
     protected $memcached = null;
     protected $ttl;
-    protected $lastInCache;
+    protected $lastInCache = null;
     
     protected $woeid;
     protected $unit;
