@@ -18,7 +18,7 @@ class ApiYahooWeatherService {
         
         $this->memcached = $memcached;
         $this->ttl = $ttl;
-        
+
         $this->woeid = $woeid;
         $this->unit = $unit;
                
