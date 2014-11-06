@@ -9,15 +9,17 @@ class ApiYahooWeatherService {
     protected $apiYahooWeatherObject = null;
     protected $memcached = null;
     protected $ttl;
+    protected $env;
     protected $lastInCache = null;
     
     protected $woeid;
     protected $unit;
 
-    public function __construct($woeid, $unit, $memcached, $ttl) {
+    public function __construct($woeid, $unit, $memcached, $ttl, $env) {
         
         $this->memcached = $memcached;
         $this->ttl = $ttl;
+	$this->env = $env;
 
         $this->woeid = $woeid;
         $this->unit = $unit;
@@ -30,14 +32,17 @@ class ApiYahooWeatherService {
 
     public function callApi($woeid,$unit=null) {
         $data = false;
+	
+	$key = $this->env.$woeid;
+
         if($this->memcached !== null){
-            $data = $this->memcached->fetch($woeid);
+            $data = $this->memcached->fetch($key);
         }
         if($data === false){
-            $this->apiYahooWeatherObject->callApi($woeid,($unit===false)?$this->unit:$unit);
+	    $this->apiYahooWeatherObject->callApi($woeid,($unit!==null)?$this->unit:$unit);
             if($this->memcached !== null){
                 $this->lastInCache = "no";
-                $this->memcached->save($woeid,$this->apiYahooWeatherObject->getLastResponse(),$this->ttl);
+                $this->memcached->save($key,$this->apiYahooWeatherObject->getLastResponse(),$this->ttl);
             }
         }else{
             $this->lastInCache = "yes";
