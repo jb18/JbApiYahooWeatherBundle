@@ -27,7 +27,6 @@ class ApiYahooWeatherService {
     /** @var string $unit c or f for Celsius or Fahrenheit */
     protected $unit;
 
-<<<<<<< HEAD
     /**
      * Constructor
      * 
@@ -39,8 +38,6 @@ class ApiYahooWeatherService {
      * 
      * @return void
      */
-=======
->>>>>>> 54a80174388619f151ab4548908c275f3166f5be
     public function __construct($woeid, $unit, \Aequasi\Bundle\CacheBundle\Service\CacheService $memcached = NULL, $ttl, $env) {
         $this->memcached = $memcached;
         $this->ttl = $ttl;
@@ -131,5 +128,4 @@ class ApiYahooWeatherService {
     public function getForecast(){
         return $this->apiYahooWeatherObject->getForecast();
     }
-
 }
