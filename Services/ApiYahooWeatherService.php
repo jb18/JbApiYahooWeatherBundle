@@ -15,8 +15,7 @@ class ApiYahooWeatherService {
     protected $woeid;
     protected $unit;
 
-    public function __construct($woeid, $unit, $memcached, $ttl, $env) {
-        
+    public function __construct($woeid, $unit, \Aequasi\Bundle\CacheBundle\Service\CacheService $memcached = NULL, $ttl, $env) {
         $this->memcached = $memcached;
         $this->ttl = $ttl;
 	$this->env = $env;
